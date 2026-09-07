@@ -18,14 +18,19 @@ function SignIn({ setIsLoggedIn }: AuthProps) {
     setStatusMsg("");
 
     try {
-      // Mock API call for logging in
       const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
 
       if (response.ok) {
-        setStatusMsg("Login successful! Redirecting...");
+        setStatusMsg("Login successful! Issuing JWT...");
+        
+        // 1. SIMULATE RECEIVING A JWT FROM THE SERVER
+        const fakeJWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.simulated_token_signature";
+        
+        // 2. STORE THE JWT IN THE BROWSER'S LOCAL STORAGE
+        localStorage.setItem("emalpha_jwt_token", fakeJWT);
         
         setTimeout(() => {
-          setIsLoggedIn(true); // Tell App.tsx we are logged in!
+          setIsLoggedIn(true); 
           navigate('/nepal-flood');
         }, 1500);
       }

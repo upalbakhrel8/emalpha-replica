@@ -9,8 +9,14 @@ function Navbar({ isLoggedIn, setIsLoggedIn }: NavbarProps) {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    setIsLoggedIn(false); // Turn global memory to false
-    navigate('/'); // Drive user back to the homepage
+    // 1. Delete the JWT token from the browser's storage
+    localStorage.removeItem("emalpha_jwt_token");
+    
+    // 2. Flip the React memory to false
+    setIsLoggedIn(false); 
+    
+    // 3. Kick them to the homepage
+    navigate('/'); 
   };
 
   return (
